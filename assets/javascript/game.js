@@ -54,9 +54,9 @@ $(document).ready(function() {
     for (var key in characters) {
         var obj = characters[key];
         var newDiv = $("<div>").attr("id", obj.id).addClass("character")
-            .append($("<img>").attr("src", obj.img)
-                .append($("<h1>").text(obj.name))
-            );
+            .append($("<img>").attr("src", obj.img).attr("alt", obj.name))
+            .append($("<h3>").text(obj.name))
+            .append($("<p>").text("health: " + obj.health));
 
         $("body").prepend(newDiv);
 
