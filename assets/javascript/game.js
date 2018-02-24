@@ -53,6 +53,22 @@ $(document).ready(function() {
         hero.attack += hero.multi;
     }
 
+    // Retry button.
+    var retry = (function() {
+        var executed = false;
+        return function() {
+            if (!executed) {
+                executed = true;
+                var button = $("<button>").attr("id", "retry")
+                    .append($("<a>").attr("href", "")
+                        .append($("<p>").text("Retry")));
+
+                $("body").append(button);
+            }
+        }
+    })();
+
+
     // Creates the divs, images, titles, and health.
     for (var key in characters) {
         var obj = characters[key];
@@ -96,17 +112,23 @@ $(document).ready(function() {
             hero.health -= enemyAttack;
             $(".hero > .character > p").text("Health: " + hero.health);
         }
+
+        // Checks if opponent health gets to zero or below...
+        if (opponent.health <= 0) {
+            $("#messages").html("You have defeated " + opponent.name + ".");
+            $(".opponent").empty();
+            //...shows success text.
+            $("#messages").append("Please pick another opponent.");
+        }
+
+        // Checks if hero health gets to zero or below...
+        if (hero.health <= 0) {
+            $("#messages").html("You have lost.");
+            $(".opponent").empty();
+            //...shows defeat text and shows "retry" button.
+            retry();
+        }
     });
-
-    // Checks if opponent health gets to zero or below...
-
-    //...shows success text.
-
-
-    // Checks if hero health gets to zero or below...
-
-    //...shows defeat text and shows "retry" button.
-
 
 
 });
