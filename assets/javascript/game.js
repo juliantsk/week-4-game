@@ -1,11 +1,11 @@
 var characters = {
-    "luke": {
-        name: "Luke Skywalker",
-        id: "luke",
+    "kylo": {
+        name: "Kylo Ren",
+        id: "kylo",
         health: 120,
         attack: 8,
         multi: 8,
-        img: "",
+        img: "assets/images/kylo.jpg",
         enemyAttackBack: 15
     },
     "darth": {
@@ -14,7 +14,7 @@ var characters = {
         health: 100,
         attack: 15,
         multi: 15,
-        img: "",
+        img: "assets/images/darth.jpg",
         enemyAttackBack: 25
     },
     "han": {
@@ -23,7 +23,7 @@ var characters = {
         health: 150,
         attack: 8,
         multi: 8,
-        img: "",
+        img: "assets/images/han.jpg",
         enemyAttackBack: 20
     },
     "stormtrooper": {
@@ -32,7 +32,7 @@ var characters = {
         health: 180,
         attack: 7,
         multi: 7,
-        img: "",
+        img: "assets/images/stormtrooper.jpg",
         enemyAttackBack: 20
     }
 };
@@ -105,7 +105,7 @@ $(document).ready(function() {
     $("#attack-btn").on("click", function() {
         var enemyAttack = opponent.enemyAttackBack;
         // checks if you have an enemy in the opponent section...
-        if (!($(".hero").is(":empty")) && !($(".opponent").is(":empty"))) {
+        if (!$(".hero").is(":empty") && !$(".opponent").is(":empty")) {
             //...attacks the opponent...
             attack();
             //...has the opponent attack your hero.

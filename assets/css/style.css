@@ -1,7 +1,42 @@
+@font-face {
+    font-family: "Distant Galaxy";
+    src: url("../fonts/DISTGRG_.ttf");
+}
+
+@font-face {
+    font-family: "Play";
+    src: url("../fonts/Play-Bold.ttf");
+}
+
+:root {
+    --red: #f5393a;
+}
+
+body {
+    font-family: "Play";
+}
+
+h1 {
+    font-family: "Distant Galaxy";
+}
+
+h1#title {
+    font-size: 10vw;
+}
+
+button {}
+
 .character {
     margin: 20px;
 }
 
+.character>p {}
+
+.character>img {
+    height: 200px;
+    width: auto;
+}
+
 #messages {
-    background-color: red;
+    background-color: var(--red);
 }
