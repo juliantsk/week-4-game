@@ -68,14 +68,14 @@ $(document).ready(function() {
 
         // When you click one of the character divs, it becomes the hero.
         if ($("#hero").is(":empty")) {
-            char.html("#hero");
+            $("#hero").html(char);
             // If you have selected a hero and you click on one of the remaining character divs it becomes your first opponent...
         } else if ($("#opponent").is(":empty")) {
-            char.html("#opponent");
+            $("#opponent").html(char);
 
         } else {
             //...however, if you've already selected an opponent, receive a message saying as much...
-            $("You have already selected an opponent and hero.").html("#messages");
+            $("#messages").html("You have already selected an opponent and hero.");
         }
     });
 
