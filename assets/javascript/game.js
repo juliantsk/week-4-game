@@ -15,7 +15,7 @@ var characters = {
         attack: 15,
         multi: 15,
         img: "assets/images/darth.jpg",
-        enemyAttackBack: 25
+        enemyAttackBack: 22
     },
     "han": {
         name: "Han Solo",
@@ -24,7 +24,7 @@ var characters = {
         attack: 8,
         multi: 8,
         img: "assets/images/han.jpg",
-        enemyAttackBack: 20
+        enemyAttackBack: 15
     },
     "stormtrooper": {
         name: "Stormtrooper",
@@ -43,6 +43,7 @@ var opponent;
 $(document).ready(function() {
     // Present starting text.
     $("#messages").html("Select a hero.");
+    $("#attack-btn").hide();
 
     // Attack function.
     function attack() {
@@ -59,8 +60,8 @@ $(document).ready(function() {
         return function() {
             if (!executed) {
                 executed = true;
-                var button = $("<button>").attr("id", "retry")
-                    .append($("<a>").attr("href", "")
+                var button = $("<a>").attr("href", "")
+                    .append($("<button>").attr("id", "retry")
                         .append($("<p>").text("Retry")));
 
                 $("body").append(button);
@@ -77,7 +78,7 @@ $(document).ready(function() {
             .append($("<h3>").text(obj.name))
             .append($("<p>").text("Health: " + obj.health));
 
-        $("body").prepend(newDiv);
+        $("div#characters").prepend(newDiv);
 
     }
 
@@ -94,6 +95,8 @@ $(document).ready(function() {
             // If you have selected a hero and you click on one of the remaining character divs it becomes your first opponent.
             $(".opponent").html(char);
             opponent = characters[char.attr("id")];
+            $("#characters").hide();
+            $("#attack-btn").show();
         } else {
             //However, if you've already selected an opponent, receive a message saying as much...
             $("#messages").html("You have already selected an opponent and hero.");
@@ -115,20 +118,38 @@ $(document).ready(function() {
 
         // Checks if opponent health gets to zero or below...
         if (opponent.health <= 0) {
-            $("#messages").html("You have defeated " + opponent.name + ".");
+            $("#messages").html("You have defeated " + opponent.name + ". ");
             $(".opponent").empty();
             //...shows success text.
             $("#messages").append("Please pick another opponent.");
+            $("#characters").show();
+            $("#attack-btn").hide();
+            if ($("#characters").is(":empty") && hero.health > 0) {
+                $("#messages").html("You have won!");
+                $(".hero, h4, h5").hide();
+                $("<img>").attr("src", hero.img).attr("alt", hero.name)
+                    .css({
+                        "height": "100%",
+                        "width": "auto",
+                        "position": "fixed",
+                        "top": "0",
+                        "left": "50%",
+                        "transform": "translate(-50%, 0)"
+                    })
+                    .appendTo("body").hide(7000);
+                retry();
+                $("#retry").hide();
+                $("#retry").show(1000);
+            }
         }
 
         // Checks if hero health gets to zero or below...
         if (hero.health <= 0) {
-            $("#messages").html("You have lost.");
-            $(".opponent").empty();
+            $("#messages").html(opponent.name + " has defeated you.");
             //...shows defeat text and shows "retry" button.
+            $("#characters, .hero, h4, h5, #attack-btn").hide()
             retry();
         }
+
     });
-
-
 });
